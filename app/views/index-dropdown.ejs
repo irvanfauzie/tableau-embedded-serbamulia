@@ -42,9 +42,9 @@
       })"
         name="HeadlineAct"
         id="HeadlineAct"
-		class="min-w-60 rounded-lg border-gray-300 text-gray-700 text-2xl"
+        class="min-w-60 rounded-lg border-gray-300 text-gray-700 text-2xl"
         x-on:change="(e) => handleOptionClick(e, $data)"
-		style="padding:10px 20px;margin:0 0 15px 10px"
+        style="padding: 10px 20px; margin: 0 0 15px 10px"
       >
         <option value="">Please select</option>
         <template x-for="(group,groupIndex) in groups" :key="groupIndex">
@@ -63,6 +63,14 @@
         hide-tabs
         toolbar="bottom"
       ></tableau-viz>
+      <iframe
+        allowfullscreen
+        frameborder="0"
+        id="iframe"
+        width="100%"
+        height="767"
+        style="border: 0"
+      ></iframe>
     </div>
   </body>
   <script>
@@ -106,10 +114,18 @@
     // console.log(getDropdownItem());
     function handleOptionClick(event, { url }) {
       url = event.target.value;
-      // console.log("Clicked value:", url);
-
-      const element = document.getElementById("tableau-viz");
-      element.setAttribute("src", url);
+      const elTableau = document.getElementById("tableau-viz");
+      const elIframe = document.getElementById("iframe");
+      const matchStr = url.match(/tableau\.com/);
+      if (matchStr != null) {
+        elIframe.style.display = "none";
+        elTableau.style.display = "block";
+        elTableau.setAttribute("src", url);
+      } else {
+        elTableau.style.display = "none";
+        elIframe.style.display = "block";
+        elIframe.setAttribute("src", url);
+      }
     }
   </script>
 </html>
