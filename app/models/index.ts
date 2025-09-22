@@ -94,6 +94,9 @@ export const TableauEmbedMaster = sequelize.define("t_tableau_embed_master",{
     c_status: {
         type: DataTypes.STRING
     },
+    c_owner: {
+        type: DataTypes.STRING
+    },
     d_created_at: {
         type: DataTypes.DATEONLY
     },
