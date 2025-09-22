@@ -44,17 +44,22 @@
         id="HeadlineAct"
 		class="min-w-60 rounded-lg border-gray-300 text-gray-700 text-2xl"
         x-on:change="(e) => handleOptionClick(e, $data)"
+<<<<<<< Updated upstream
 		style="padding:10px 20px;margin:0 0 15px 10px"
+=======
+        style="padding: 10px 20px; margin: 0 15px 15px 10px"
+>>>>>>> Stashed changes
       >
         <option value="">Please select</option>
         <template x-for="(group,groupIndex) in groups" :key="groupIndex">
           <optgroup :label="group.group">
             <template x-for="(item,itemIndex) in group.items" :key="itemIndex">
-              <option :value="item.c_embed" x-text="item.c_title"></option>
+              <option :value="item.c_embed" x-text="item.c_title" :data-owner="item.c_owner"></option>
             </template>
           </optgroup>
         </template>
       </select>
+      <label class="text-3xl font-medium text-gray-900" id="labelOwner"></label>
     </div>
     <div>
       <tableau-viz
@@ -106,10 +111,30 @@
     // console.log(getDropdownItem());
     function handleOptionClick(event, { url }) {
       url = event.target.value;
+<<<<<<< Updated upstream
       // console.log("Clicked value:", url);
 
       const element = document.getElementById("tableau-viz");
       element.setAttribute("src", url);
+=======
+      const elTableau = document.getElementById("tableau-viz");
+      const elIframe = document.getElementById("iframe");
+      const selectedOption = event.target.options[event.target.selectedIndex].getAttribute("data-owner");
+      const elOwner = document.getElementById("labelOwner");
+      const matchStr = url.match(/tableau\.com/);
+
+      if (matchStr != null) {
+        elIframe.style.display = "none";
+        elTableau.style.display = "block";
+        elTableau.setAttribute("src", url);
+      } else {
+        elTableau.style.display = "none";
+        elIframe.style.display = "block";
+        elIframe.setAttribute("src", url);
+      }
+
+      elOwner.textContent = selectedOption;  
+>>>>>>> Stashed changes
     }
   </script>
 </html>
