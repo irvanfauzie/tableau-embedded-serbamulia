@@ -212,6 +212,7 @@ export const embedByParamsLimitedV3 = async (req: any, res: any) => {
         n_id: {
           [Op.in]: tableauEmbedDataFromDbV3?.dataValues.j_embed_id,
         },
+        c_status: 'ACTIVE'
       },
     });
     console.log(

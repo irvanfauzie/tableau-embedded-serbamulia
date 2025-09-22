@@ -42,13 +42,9 @@
       })"
         name="HeadlineAct"
         id="HeadlineAct"
-		class="min-w-60 rounded-lg border-gray-300 text-gray-700 text-2xl"
+        class="min-w-60 rounded-lg border-gray-300 text-gray-700 text-2xl"
         x-on:change="(e) => handleOptionClick(e, $data)"
-<<<<<<< Updated upstream
-		style="padding:10px 20px;margin:0 0 15px 10px"
-=======
         style="padding: 10px 20px; margin: 0 15px 15px 10px"
->>>>>>> Stashed changes
       >
         <option value="">Please select</option>
         <template x-for="(group,groupIndex) in groups" :key="groupIndex">
@@ -68,6 +64,14 @@
         hide-tabs
         toolbar="bottom"
       ></tableau-viz>
+      <iframe
+        allowfullscreen
+        frameborder="0"
+        id="iframe"
+        width="100%"
+        height="767"
+        style="border: 0"
+      ></iframe>
     </div>
   </body>
   <script>
@@ -111,12 +115,7 @@
     // console.log(getDropdownItem());
     function handleOptionClick(event, { url }) {
       url = event.target.value;
-<<<<<<< Updated upstream
-      // console.log("Clicked value:", url);
 
-      const element = document.getElementById("tableau-viz");
-      element.setAttribute("src", url);
-=======
       const elTableau = document.getElementById("tableau-viz");
       const elIframe = document.getElementById("iframe");
       const selectedOption = event.target.options[event.target.selectedIndex].getAttribute("data-owner");
@@ -133,8 +132,7 @@
         elIframe.setAttribute("src", url);
       }
 
-      elOwner.textContent = selectedOption;  
->>>>>>> Stashed changes
+      elOwner.textContent = selectedOption;
     }
   </script>
 </html>
