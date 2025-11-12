@@ -214,6 +214,7 @@ export const embedByParamsLimitedV3 = async (req: any, res: any) => {
         },
         c_status: 'ACTIVE'
       },
+      order: [['c_title', 'ASC']],
     });
     console.log(
       "tableauEmbedDataFromMasterAll data from db: ",
