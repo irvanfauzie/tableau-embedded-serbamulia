@@ -50,12 +50,14 @@
         <template x-for="(group,groupIndex) in groups" :key="groupIndex">
           <optgroup :label="group.group">
             <template x-for="(item,itemIndex) in group.items" :key="itemIndex">
-              <option :value="item.c_embed" x-text="item.c_title" :data-owner="item.c_owner"></option>
+              <option :value="item.c_embed" x-text="item.c_title" :data-owner="item.c_owner" :data-utube="item.c_utube ? item.n_id : 0" :data-desc="item.c_desc ? item.n_id : 0"></option>
             </template>
           </optgroup>
         </template>
       </select>
       <label class="text-3xl font-medium text-gray-900" id="labelOwner"></label>
+      <label style="float: right" id="labelUtube"></label>
+      <label style="float: right" id="labelDesc"></label>
     </div>
     <div>
       <tableau-viz
@@ -118,8 +120,12 @@
 
       const elTableau = document.getElementById("tableau-viz");
       const elIframe = document.getElementById("iframe");
-      const selectedOption = event.target.options[event.target.selectedIndex].getAttribute("data-owner");
+      const selectedOwner = event.target.options[event.target.selectedIndex].getAttribute("data-owner");
+      const selectedUtube = event.target.options[event.target.selectedIndex].getAttribute("data-utube");
+      const selectedDesc = event.target.options[event.target.selectedIndex].getAttribute("data-desc");
       const elOwner = document.getElementById("labelOwner");
+      const elUtube = document.getElementById("labelUtube");
+      const elDesc = document.getElementById("labelDesc");
       const matchStr = url.match(/tableau\.com/);
 
       if (matchStr != null) {
@@ -132,7 +138,9 @@
         elIframe.setAttribute("src", url);
       }
 
-      elOwner.textContent = selectedOption;
+      elOwner.textContent = selectedOwner;
+      elUtube.textContent = '<a onclick="" title="Video">v</a>';
+      elDesc.textContent = '<a onclick="" title="Info">i</a>';
     }
   </script>
 </html>
