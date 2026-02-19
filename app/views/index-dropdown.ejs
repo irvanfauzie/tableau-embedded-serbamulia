@@ -139,8 +139,18 @@
       }
 
       elOwner.textContent = selectedOwner;
-      elUtube.textContent = '<a onclick="" title="Video">v</a>';
-      elDesc.textContent = '<a onclick="" title="Info">i</a>';
+
+      if (selectedUtube && selectedUtube !== "0") {
+        elUtube.innerHTML = `<a onclick="window.parent.document.getElementById('youtubeEmbed').click()" title="Video" style="margin-left: 10px; cursor: pointer;"><i class="glyphicon glyphicon-play-circle" style="font-size: 25px;"></i></a>`;
+      } else {
+        elUtube.innerHTML = "";
+      }
+
+      if (selectedDesc && selectedDesc !== "0") {
+        elDesc.innerHTML = `<a title="Info" style="margin-left: 10px; cursor: pointer;"><i class="glyphicon glyphicon-info-sign" style="font-size: 25px;"></i></a>`;
+      } else {
+        elDesc.innerHTML = "";
+      }
     }
   </script>
 </html>
