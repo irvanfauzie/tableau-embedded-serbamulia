@@ -139,8 +139,36 @@
       }
 
       elOwner.textContent = selectedOwner;
-      elUtube.textContent = '<a onclick="" title="Video">v</a>';
-      elDesc.textContent = '<a onclick="" title="Info">i</a>';
+
+      if (selectedUtube && selectedUtube !== "0") {
+        elUtube.innerHTML = `<a onclick="window.parent.postMessage({
+          event: 'YOUTUBE_ACTION',
+          payload: {
+              embedId: ${selectedUtube}
+          },
+          meta: {
+              source:'tableau',
+              version:1
+          }
+        }, '<%- parentUrl %>tableau/chart-dashboard')" title="Video" style="margin-left:10px;cursor:pointer"><i class="glyphicon glyphicon-play-circle" style="font-size:25px;color:#2a2874"></i></a>`;
+      } else {
+        elUtube.innerHTML = "";
+      }
+
+      if (selectedDesc && selectedDesc !== "0") {
+        elDesc.innerHTML = `<a onclick="window.parent.postMessage({
+            event: 'INFO_ACTION',
+            payload: {
+                embedId: ${selectedUtube}
+            },
+            meta: {
+                source:'tableau',
+                version:1
+            }
+          }, '<%- parentUrl %>tableau/chart-dashboard')" title="Information" style="margin-left:10px;cursor:pointer"><i class="glyphicon glyphicon-info-sign" style="font-size:25px;color:#2a2874"></i></a>`;
+      } else {
+        elDesc.innerHTML = "";
+      }
     }
   </script>
 </html>

@@ -225,6 +225,7 @@ export const embedByParamsLimitedV3 = async (req: any, res: any) => {
       res.render("index-dropdown", {
         token: token,
 		pathUrl: process.env.PATH_URL,
+		parentUrl: process.env.PARENT_URL,
         master: JSON.stringify(
           tableauEmbedDataFromMasterAll?.map((item1) =>
             tableauEmbedDataFromMasterAll?.map((item2) => {
