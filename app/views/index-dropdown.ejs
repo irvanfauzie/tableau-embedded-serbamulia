@@ -50,14 +50,15 @@
         <template x-for="(group,groupIndex) in groups" :key="groupIndex">
           <optgroup :label="group.group">
             <template x-for="(item,itemIndex) in group.items" :key="itemIndex">
-              <option :value="item.c_embed" x-text="item.c_title" :data-owner="item.c_owner" :data-utube="item.c_utube ? item.n_id : 0" :data-desc="item.c_desc ? item.n_id : 0"></option>
+              <option :value="item.c_embed" x-text="item.c_title" :data-owner="item.c_owner" :data-utube="item.c_utube ? item.n_id : 0" :data-desc="item.c_desc ? item.n_id : 0" :data-id="item.n_id"></option>
             </template>
           </optgroup>
         </template>
       </select>
       <label class="text-3xl font-medium text-gray-900" id="labelOwner"></label>
-      <label style="float: right" id="labelUtube"></label>
-      <label style="float: right" id="labelDesc"></label>
+      <label style="float:right" id="labelUtube"></label>
+      <label style="float:right" id="labelDesc"></label>
+      <label style="float:right" id="labelComment"></label>
     </div>
     <div>
       <tableau-viz
@@ -124,9 +125,11 @@
       const selectedOwner = event.target.options[event.target.selectedIndex].getAttribute("data-owner");
       const selectedUtube = event.target.options[event.target.selectedIndex].getAttribute("data-utube");
       const selectedDesc = event.target.options[event.target.selectedIndex].getAttribute("data-desc");
+      const selectedId = event.target.options[event.target.selectedIndex].getAttribute("data-id");
       const elOwner = document.getElementById("labelOwner");
       const elUtube = document.getElementById("labelUtube");
       const elDesc = document.getElementById("labelDesc");
+      const elComment = document.getElementById("labelComment");
       const matchStr = url.match(/tableau\.com/);
 
       if (matchStr != null) {
@@ -170,6 +173,17 @@
       } else {
         elDesc.innerHTML = "";
       }
+
+      elComment.innerHTML = `<a onclick="window.parent.postMessage({
+          event: 'COMMENT_ACTION',
+          payload: {
+              embedId: ${selectedId}
+          },
+          meta: {
+              source:'tableau',
+              version:1
+          }
+        }, '<%- parentUrl %>tableau/chart-dashboard')" title="Feedback" style="margin-left:10px;cursor:pointer"><i class="glyphicon glyphicon-comment" style="font-size:25px;color:#2a2874"></i></a>`;
     }
   </script>
 </html>
