@@ -78,7 +78,8 @@
   </body>
   <script>
     const getDropdownItem = () => {
-      const jsonData = JSON.parse('<%- master %>');
+      //const jsonData = JSON.parse('<%- master %>');
+      const jsonData = <%- master %>;
 
       // Create an object to store unique items within each group
       const groupedItems = {};
@@ -159,7 +160,7 @@
         elDesc.innerHTML = `<a onclick="window.parent.postMessage({
             event: 'INFO_ACTION',
             payload: {
-                embedId: ${selectedUtube}
+                embedId: ${selectedDesc}
             },
             meta: {
                 source:'tableau',
