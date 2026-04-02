@@ -39,7 +39,19 @@
         x-data="{groups: [], url: ''}"
         x-init="groups = getDropdownItem().sort((a, b) => {
           return a.group.localeCompare(b.group);
-      })"
+        });
+        $nextTick(() => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const layout = urlParams.get('layout') || 'KPI Looker';
+          const options = $el.options;
+          for (let i = 0; i < options.length; i++) {
+            if (options[i].text === layout) {
+              $el.selectedIndex = i;
+              handleOptionClick({ target: $el }, $data);
+              break;
+            }
+          }
+        });"
         name="HeadlineAct"
         id="HeadlineAct"
         class="min-w-60 rounded-lg border-gray-300 text-gray-700 text-2xl"

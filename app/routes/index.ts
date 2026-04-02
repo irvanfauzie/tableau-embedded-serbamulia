@@ -9,6 +9,7 @@ const setRouter = (app:e.Express) => {
     router.get("/params/limited/v1",embedByParamsLimitedV1)
     router.get("/params/limited/v2",embedByParamsLimitedV2)
     router.get("/params/limited/v3",embedByParamsLimitedV3)
+    router.get("/params/limited/portal",embedByParamsLimitedV3)
     router.get("/input",embedByInput)
     router.get("/financialmodel/params",embedByParamsFinancialModel)
 
